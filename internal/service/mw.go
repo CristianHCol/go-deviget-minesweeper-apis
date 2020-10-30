@@ -1,8 +1,8 @@
 package mw
 
 import (
-	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infrastructure/common/cache"
-	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infrastructure/mw/repository"
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/common/cache"
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/mw/repository"
 )
 
 // Minesweeper implements the mineswiperr contract

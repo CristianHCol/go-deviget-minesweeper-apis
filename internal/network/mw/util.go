@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/common"
-	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/mw"
 	netcommon "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/network/common"
 	"github.com/valyala/fasthttp"
 )
@@ -64,9 +63,6 @@ func GetIDFromRequest(rctx *fasthttp.RequestCtx) (id int, err error) {
 
 // SetCommonErrorResponse Build a generic error response
 func SetCommonErrorResponse(err error, response *common.BaseHTTPResponse, violations map[string]string, rctx *fasthttp.RequestCtx, action string) {
-	if err == mw.ErrorValidation {
-		response = mw.MapToUserResponse(nil, violations)
-	}
 	fmt.Println("[user Handler]: error "+action+" Minesweeper", err)
 	SetMetaAndError(response, err)
 	statusCode := GetErrorHTTPStatusCode(response.Error.ErrorCode)

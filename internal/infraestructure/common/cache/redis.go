@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infrastructure/common"
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/common"
 )
 
 // RedisCache is the implementation for the cache

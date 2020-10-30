@@ -5,7 +5,7 @@ import (
 )
 
 // CreateUser is the create user handler
-func (h *UserHandler) CreateUser(rctx *fasthttp.RequestCtx) {
+func (h *MinesweeperHandler) CreateUser(rctx *fasthttp.RequestCtx) {
 	// rq := &mw.CreateUserRequest{}
 	// response := &common.BaseHTTPResponse{}
 	// SetCommonHeaders(rctx) // TOOD move this to the middleware

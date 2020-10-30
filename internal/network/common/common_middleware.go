@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infrastructure/common/cache"
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/common/cache"
 )
 
 var memoryCache cache.Cache = cache.NewRedisInstance()

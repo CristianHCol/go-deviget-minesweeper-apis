@@ -8,10 +8,10 @@ import (
 	server "github.com/CristianHCol/lm-http/pkg/server"
 	"github.com/joho/godotenv"
 
-	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infrastructure/common/cache"
-	mwrepo "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infrastructure/mw/repository"
-	mwhttp "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/network/mw/http"
-	mwrsvc "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/service/mw"
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/common/cache"
+	mwrepo "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/mw/repository"
+	mwhttp "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/network/mw"
+	mwrsvc "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/service"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 	netcommon.LoadConfig()
 	mwRepo := mwrepo.NewMinesWeeperRepo()
 	cacheSvc := cache.NewRedisInstance()
-	mwSvc := mwrsvc.New(mwrepo, cacheSvc)
+	mwSvc := mwrsvc.New(mwRepo, cacheSvc)
 	mwHandler := mwhttp.NewMinesWeeperHandler(mwSvc)
 	sv := &server.Server{}
 	sv.AddHandler(netcommon.MinesWeeperBasePath, netcommon.Post, mwHandler.CreateUser)

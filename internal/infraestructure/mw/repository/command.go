@@ -2,11 +2,6 @@ package repository
 
 import (
 	"context"
-	"errors"
-	"fmt"
-	"strings"
-	"time"
-
 )
 
 // MinesWeeperCommand user command implementation
@@ -17,9 +12,8 @@ func NewMinesWeeperCommand() *MinesWeeperCommand {
 	return &MinesWeeperCommand{}
 }
 
-// Create creates a new user in the DB
-func (c MinesWeeperCommand) Create(ctx context.Context, user string) (userStatus bool, error) {
+// CreateUser create a new user in the DB
+func (c MinesWeeperCommand) CreateUser(ctx context.Context, userName string) (bool, error) {
 	//TODO Save in redis
 	return true, nil
 }
-
