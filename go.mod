@@ -1,4 +1,4 @@
-module gitlab.com/fixit/go-apis
+module github.com/CristianHCol/go-deviget-minesweeper-apis
 
 go 1.15
 
@@ -13,7 +13,7 @@ require (
 	github.com/lib/pq v1.8.0
 	github.com/stretchr/testify v1.6.1
 	github.com/valyala/fasthttp v1.16.0
-	github.com/CristianHCol/lm-http v1.0.2
+	github.com/CristianHCol/lm-http v1.0.0
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	google.golang.org/grpc v1.32.0
 

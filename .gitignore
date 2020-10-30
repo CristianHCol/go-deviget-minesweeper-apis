@@ -1,15 +1,10 @@
-# Binaries for programs and plugins
+*.sum
 *.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
+*.bin
+.DS_Store
+.vscode/
 *.out
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
+*.cov
+.env
+.envrc
+.netrc
