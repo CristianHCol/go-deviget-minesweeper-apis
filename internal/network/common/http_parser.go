@@ -7,6 +7,7 @@ import (
 
 	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/common"
 	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/mw"
+
 	"github.com/valyala/fasthttp"
 )
 
@@ -60,7 +61,7 @@ func SetError(response *common.BaseHTTPResponse, err error) {
 	}
 
 	if code, ok := mw.ServiceErrorsCode[err]; !ok {
-		response.Error.ErrorCode = mw.UserInternalError
+		response.Error.ErrorCode = mw.InternalError
 	} else {
 		response.Error.ErrorCode = code
 	}

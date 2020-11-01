@@ -5,7 +5,7 @@ import (
 	"os"
 
 	netcommon "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/network/common"
-	server "github.com/CristianHCol/lm-http/pkg/server"
+	server "github.com/CristianHCol/go-deviget-minesweeper-apis/server"
 	"github.com/joho/godotenv"
 
 	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/common/cache"
@@ -19,14 +19,14 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
 	netcommon.LoadConfig()
 	mwRepo := mwrepo.NewMinesWeeperRepo()
 	cacheSvc := cache.NewRedisInstance()
 	mwSvc := mwrsvc.New(mwRepo, cacheSvc)
 	mwHandler := mwhttp.NewMinesWeeperHandler(mwSvc)
 	sv := &server.Server{}
-	sv.AddHandler(netcommon.MinesWeeperBasePath, netcommon.Post, mwHandler.CreateUser)
+	sv.AddHandler(netcommon.MinesWeeperBasePath+"/user", netcommon.Post, mwHandler.CreateUser)
+	sv.AddHandler(netcommon.MinesWeeperBasePath+"/game", netcommon.Post, mwHandler.CreateGame)
 
-	go sv.Start(os.Getenv("HTTP_PORT"))
+	sv.Start(os.Getenv("HTTP_PORT"))
 }

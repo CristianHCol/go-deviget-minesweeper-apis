@@ -5,10 +5,10 @@ LDFLAGS=-ldflags "-X main.Version=${VERSION}"
 
 #go tool commands
 build:
-	go build ${LDFLAGS} -o ${BINARY} cmd/ms/main.go
+	go build ${LDFLAGS} -o ${BINARY} cmd/mw/main.go
 
 run:
-	@go run cmd/ms/main.go
+	@go run cmd/mw/main.go
 
 run-lint:
 	./.bin/golangci-lint run

@@ -14,7 +14,7 @@ COPY . .
 RUN cp .netrc /root/
 
 RUN go build ./...
-RUN go build -o ./ms-api cmd/ms/main.go
+RUN go build -o ./mw-api cmd/mw/main.go
 
 FROM alpine
 
@@ -22,9 +22,9 @@ RUN apk --no-cache add ca-certificates bash
 
 WORKDIR /
 
-COPY --from=builder /go/src/github.com/CristianHCol/go-deviget-minesweeper-apis/ms-api /
+COPY --from=builder /go/src/github.com/CristianHCol/go-deviget-minesweeper-apis/mw-api /
 
 ARG API_NAME
-RUN chmod +x ./ms-api && ln -s "${API_NAME}" /main
+RUN chmod +x ./mw-api && ln -s "${API_NAME}" /main
 
 CMD [ "/main" ]
