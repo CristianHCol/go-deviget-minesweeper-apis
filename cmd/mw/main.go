@@ -27,6 +27,8 @@ func main() {
 	sv := &server.Server{}
 	sv.AddHandler(netcommon.MinesWeeperBasePath+"/user", netcommon.Post, mwHandler.CreateUser)
 	sv.AddHandler(netcommon.MinesWeeperBasePath+"/game", netcommon.Post, mwHandler.CreateGame)
+	sv.AddHandler(netcommon.MinesWeeperBasePath+"/game/{gamename}/{username}", netcommon.Get, mwHandler.StartGame)
+	sv.AddHandler(netcommon.MinesWeeperBasePath+"/game/{gamename}/{username}/action", netcommon.Post, mwHandler.ActionGame)
 
 	sv.Start(os.Getenv("HTTP_PORT"))
 }

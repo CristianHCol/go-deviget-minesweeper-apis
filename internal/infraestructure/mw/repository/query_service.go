@@ -2,10 +2,12 @@ package repository
 
 import (
 	"context"
+
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/model"
 )
 
 // QueryService Query service contract
 type QueryService interface {
-	// GetByUserName fetches one user from storage
-	GetByUserName(ctx context.Context, userName string) (bool, error)
+	// StartGame start a new game by user
+	StartGame(ctx context.Context, userName string, gameName string) (*model.Game, error)
 }

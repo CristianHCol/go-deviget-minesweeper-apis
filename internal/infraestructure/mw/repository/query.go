@@ -2,6 +2,8 @@ package repository
 
 import (
 	"context"
+
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/model"
 )
 
 // MinesWeeperQuery user query implementation
@@ -12,7 +14,9 @@ func NewMinesWeeperQuery() *MinesWeeperQuery {
 	return &MinesWeeperQuery{}
 }
 
-// GetByUserName gets a user by the username
-func (q *MinesWeeperQuery) GetByUserName(ctx context.Context, userName string) (bool, error) {
-	return true, nil
+// StartGame gstart a game and return board
+func (q *MinesWeeperQuery) StartGame(ctx context.Context, userName string, gameName string) (*model.Game, error) {
+	response := &model.Game{}
+
+	return response, nil
 }

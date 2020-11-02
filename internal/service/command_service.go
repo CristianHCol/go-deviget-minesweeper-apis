@@ -10,6 +10,7 @@ import (
 
 	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/model"
 	dmmw "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/domain/mw"
+	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/service/common"
 )
 
 // CreateUser creates a new user in the system
@@ -24,34 +25,34 @@ func (s *Minesweeper) CreateUser(ctx context.Context, userName string) (bool, er
 	user := []byte(userName)
 	if err := s.cache.Set(ctx, userName, user, uint64(0)); err != nil {
 		log.Fatal("error saving in redis")
-		return false, dmmw.ErrInternalUser
+		return false, dmmw.ErrInternalError
 	}
 	fmt.Println("Username saved sucessfully")
 	return true, nil
 }
 
 // CreateGame creates a new game in the system
-func (s *Minesweeper) CreateGame(ctx context.Context, game *model.Game) (bool, error) {
+func (s *Minesweeper) CreateGame(ctx context.Context, game *model.Game) (bool, string, error) {
 	userExist, err := s.cache.Get(ctx, game.UserName)
 	count := 0
 	if err != nil || userExist == nil {
 		fmt.Println("Username not exists: " + game.UserName)
-		return false, dmmw.ErrUserNotFound
+		return false, "", dmmw.ErrUserNotFound
 	}
 
 	lastGame, err := s.cache.Get(ctx, game.UserName+"_LastGame")
 	if err != nil {
 		fmt.Println("Error getting last game")
-		return false, dmmw.ErrInternalUser
+		return false, "", dmmw.ErrInternalError
 	}
 	if lastGame == nil {
 		count = 1
 	} else {
 		byteToInt, _ := strconv.Atoi(string(lastGame))
 		count = byteToInt + 1
-		fmt.Println(count)
 	}
 	game.Name = fmt.Sprint(game.UserName+"Game", count)
+	game.Status = "NEW"
 
 	if game.Rows == 0 {
 		game.Rows = model.DefaultRows
@@ -86,7 +87,7 @@ func (s *Minesweeper) CreateGame(ctx context.Context, game *model.Game) (bool, e
 
 	if err := s.cache.Set(ctx, game.Name, GameToSave, uint64(0)); err != nil {
 		log.Fatal("error saving in redis")
-		return false, dmmw.ErrInternalUser
+		return false, "", dmmw.ErrInternalError
 	}
 
 	if err := s.cache.Set(ctx, game.UserName+"_LastGame", []byte(strconv.Itoa(count)), uint64(0)); err != nil {
@@ -94,5 +95,78 @@ func (s *Minesweeper) CreateGame(ctx context.Context, game *model.Game) (bool, e
 	}
 
 	fmt.Println("Game saved sucessfully")
-	return true, nil
+	return true, game.Name, nil
+}
+
+// ActionGame execute an action in the game
+func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName string, actionType string, row int, col int) (*model.Game, error) {
+	response := &model.Game{}
+
+	gameExist, err := s.cache.Get(ctx, gameName)
+	if err != nil || gameExist == nil {
+		fmt.Println("game do not exists: " + gameName)
+		return nil, dmmw.ErrGameNotFound
+	}
+	var game model.Game
+	err = json.Unmarshal([]byte(gameExist), &game)
+	if err != nil {
+		return nil, dmmw.ErrInternalError
+	}
+
+	if game.UserName != userName {
+		fmt.Println("Invalid username for this game: " + userName)
+		return nil, dmmw.ErrGamePermissionDenied
+	}
+
+	if game.Status == "GAME_OVER" {
+		fmt.Println("The game is OVER: " + gameName)
+		return nil, dmmw.ErrGameIsOver
+	}
+
+	if game.Status == "WON" {
+		fmt.Println("The game is WON: " + gameName)
+		return nil, dmmw.ErrGameIsWon
+	}
+
+	if game.Status == "PLAYING" {
+		if actionType == "CLICK" {
+			common.Click(&game, row, col)
+			if err := common.Click(&game, row, col); err != nil {
+				return nil, err
+			}
+		}
+
+		if actionType == "FLAG" {
+			if err := common.Flag(&game, row, col); err != nil {
+				return nil, err
+			}
+		}
+
+		response = &game
+		gameBytes := new(bytes.Buffer)
+		json.NewEncoder(gameBytes).Encode(response)
+		GameToSave := []byte(gameBytes.Bytes())
+
+		if err := s.cache.Set(ctx, game.Name, GameToSave, uint64(0)); err != nil {
+			log.Fatal("error saving in redis")
+			return nil, dmmw.ErrInternalError
+		}
+
+		fmt.Println(response)
+
+		if game.Status == "GAME_OVER" {
+			fmt.Println("The game is OVER: " + gameName)
+			return nil, dmmw.ErrGameIsOver
+		}
+
+		if game.Status == "WON" {
+			fmt.Println("The game is WON: " + gameName)
+			return nil, dmmw.ErrGameIsWon
+		}
+	} else {
+		fmt.Println("Uknow game status: " + game.Status)
+		return nil, dmmw.ErrInternalError
+	}
+
+	return response, nil
 }

@@ -19,6 +19,13 @@ type CreateGameRequest struct {
 	Mines    int    `json:"mines,omitempty"`
 }
 
+// ActionRequest request for create game
+type ActionRequest struct {
+	ActionType string `json:"action_type,omitempty"`
+	Row        int    `json:"row,omitempty"`
+	Colum      int    `json:"column,omitempty"`
+}
+
 // MapToUserName in request maps http request into user request
 func MapToUserName(request *CreateUserRequest) string {
 	return request.UserName
@@ -39,5 +46,14 @@ func MapToGame(request *CreateGameRequest) *model.Game {
 		CreatedAt: time.Now(),
 		StartedAt: time.Now(),
 		TimeSpent: 0,
+	}
+}
+
+// MapToAction in request maps http request into user request
+func MapToAction(request *ActionRequest) *model.Action {
+	return &model.Action{
+		Type:   request.ActionType,
+		Row:    request.Row,
+		Column: request.Colum,
 	}
 }
