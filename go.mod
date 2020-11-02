@@ -1,8 +1,9 @@
-module gitlab.com/fixit/go-apis
+module github.com/CristianHCol/go-deviget-minesweeper-apis
 
 go 1.15
 
 require (
+	github.com/andybalholm/brotli v1.0.1 // indirect
 	github.com/fasthttp/router v1.3.2
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.2
 	github.com/go-redis/redis/v8 v8.2.2
@@ -10,10 +11,10 @@ require (
 	github.com/golang/protobuf v1.4.2
 	github.com/google/flatbuffers v1.12.0
 	github.com/joho/godotenv v1.3.0
+	github.com/klauspost/compress v1.11.2 // indirect
 	github.com/lib/pq v1.8.0
 	github.com/stretchr/testify v1.6.1
 	github.com/valyala/fasthttp v1.16.0
-	github.com/CristianHCol/lm-http v1.0.2
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	google.golang.org/grpc v1.32.0
 
