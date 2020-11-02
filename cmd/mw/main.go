@@ -1,12 +1,10 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	netcommon "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/network/common"
 	server "github.com/CristianHCol/go-deviget-minesweeper-apis/server"
-	"github.com/joho/godotenv"
 
 	"github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/common/cache"
 	mwrepo "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/infraestructure/mw/repository"
@@ -15,10 +13,10 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 	netcommon.LoadConfig()
 	mwRepo := mwrepo.NewMinesWeeperRepo()
 	cacheSvc := cache.NewRedisInstance()
