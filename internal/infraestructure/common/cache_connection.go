@@ -17,7 +17,7 @@ var redisIdleConn, _ = strconv.Atoi(os.Getenv("CACHE_IDLE_CONN"))
 func GetRedisConnection(ctx context.Context) *redis.Conn {
 	if redisConnection == nil {
 		redisConnection = redis.NewClient(&redis.Options{
-			Addr:         os.Getenv("REDISCLOUD_URL"),
+			Addr:         os.Getenv("REDISCLOUD"),
 			PoolSize:     redisPoolSize,
 			MinIdleConns: redisIdleConn,
 			Password:     os.Getenv("CACHE_PASSWORD"),
