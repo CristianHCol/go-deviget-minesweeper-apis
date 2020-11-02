@@ -1,4 +1,4 @@
-FROM golang:1.14-alpine AS builder
+FROM golang:1.15 AS builder
 
 ### add make gcc g++ python if you will use native dependencies
 RUN mkdir -p $GOPATH/src/github.com/CristianHCol/go-deviget-minesweeper-apis && \
