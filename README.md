@@ -3,7 +3,7 @@
 Contains all Apis for the Minesweeper game. Written in Golang and Redis.
 
 ## TODO requeriments
-- For deploy locally, Redist migth be installed
+- For deploy locally, Redis migth be installed
 - Use docker compose to setup your environment locally
 
 ## TODO installation
@@ -51,7 +51,7 @@ curl -X POST \
 }'
 ```
 
-### This api es deployed in heroku
+### This api is deployed in heroku
 ```
 https://cristian-go-minesweeper-api.herokuapp.com/api/v1/mw/user
 ```
