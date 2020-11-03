@@ -63,7 +63,6 @@ func Click(game *model.Game, i, j int) error {
 
 // TODO checkAdjacents the adjacents click
 func checkAdjacents(game *model.Game, i, j int) error {
-
 	if game.Rows > j+1 && !game.Grid[i][j+1].Mine {
 		game.Grid[i][j+1].Clicked = true
 		game.Cliks++
