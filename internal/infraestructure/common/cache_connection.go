@@ -20,7 +20,7 @@ func GetRedisConnection(ctx context.Context) *redis.Conn {
 		var resolvedURL = os.Getenv("REDIS_URL")
 		var password = ""
 
-		parsedURL, _ := url.Parse(os.Getenv("CACHE_URI"))
+		parsedURL, _ := url.Parse(resolvedURL)
 		password, _ = parsedURL.User.Password()
 		resolvedURL = parsedURL.Host
 
