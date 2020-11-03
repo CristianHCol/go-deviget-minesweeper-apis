@@ -16,7 +16,6 @@ import (
 // CreateUser creates a new user in the system
 func (s *Minesweeper) CreateUser(ctx context.Context, userName string) (bool, error) {
 	userExist, err := s.cache.Get(ctx, userName)
-
 	if err != nil || userExist != nil {
 		fmt.Println("Username already exists: " + userName)
 		return false, dmmw.ErrUserKeyDuplicated

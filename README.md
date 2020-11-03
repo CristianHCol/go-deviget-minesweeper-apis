@@ -7,6 +7,7 @@ Contains all Apis for the Minesweeper game. Written in Golang and Redis.
 - Use docker compose to setup your environment locally
 
 ## TODO installation
+- Export environment variables source .env.dev or set it manually
 - You could use go run cmd/mw/main.go 
 - Or you could run make run command
 
