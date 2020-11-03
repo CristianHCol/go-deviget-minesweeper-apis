@@ -20,7 +20,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_name\": \"BRAN5\"\n}",
+					"raw": "{\n    \"user_name\": \"Kriz2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -28,13 +28,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema}}://{{url}}/api/{{api_version}}/mw/user",
+					"raw": "{{schema}}://{{url}}/{{api_version}}/mw/user",
 					"protocol": "{{schema}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
 						"{{api_version}}",
 						"mw",
 						"user"
@@ -66,13 +65,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema}}://{{url}}/api/{{api_version}}/mw/game",
+					"raw": "{{schema}}://{{url}}/{{api_version}}/mw/game",
 					"protocol": "{{schema}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
 						"{{api_version}}",
 						"mw",
 						"game"
@@ -107,13 +105,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema}}://{{url}}/api/{{api_version}}/mw/game/KrizGame1/Kriz",
+					"raw": "{{schema}}://{{url}}/{{api_version}}/mw/game/KrizGame1/Kriz",
 					"protocol": "{{schema}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
 						"{{api_version}}",
 						"mw",
 						"game",
@@ -147,13 +144,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{schema}}://{{url}}/api/{{api_version}}/mw/game/KrizGame1/Kriz/action",
+					"raw": "{{schema}}://{{url}}/{{api_version}}/mw/game/KrizGame1/Kriz/action",
 					"protocol": "{{schema}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"api",
 						"{{api_version}}",
 						"mw",
 						"game",
