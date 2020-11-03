@@ -41,6 +41,7 @@ func CreateBoard(game *model.Game) *model.Game {
 
 // Click execute click
 func Click(game *model.Game, i, j int) error {
+
 	if game.Grid[i][j].Clicked {
 		return errors.New("Already click this field")
 	}

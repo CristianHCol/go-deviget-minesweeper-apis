@@ -129,7 +129,6 @@ func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName 
 
 	if game.Status == "PLAYING" {
 		if actionType == "CLICK" {
-			common.Click(&game, row, col)
 			if err := common.Click(&game, row, col); err != nil {
 				return nil, err
 			}
@@ -140,7 +139,6 @@ func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName 
 				return nil, err
 			}
 		}
-
 		response = &game
 		gameBytes := new(bytes.Buffer)
 		json.NewEncoder(gameBytes).Encode(response)
@@ -163,7 +161,7 @@ func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName 
 			return nil, dmmw.ErrGameIsWon
 		}
 	} else {
-		fmt.Println("Uknow game status: " + game.Status)
+		fmt.Println("Unknown game status: " + game.Status)
 		return nil, dmmw.ErrInternalError
 	}
 
