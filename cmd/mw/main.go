@@ -33,6 +33,6 @@ func main() {
 	sv.AddHandler(netcommon.MinesWeeperBasePath+"/game/{gamename}/{username}", netcommon.Get, mwHandler.StartGame)
 	sv.AddHandler(netcommon.MinesWeeperBasePath+"/game/{gamename}/{username}/action", netcommon.Post, mwHandler.ActionGame)
 
-	sv.Start(os.Getenv("HTTP_PORT"))
+	sv.Start(os.Getenv("PORT"))
 
 }
