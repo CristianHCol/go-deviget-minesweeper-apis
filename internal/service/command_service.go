@@ -130,13 +130,13 @@ func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName 
 	if game.Status == "PLAYING" {
 		if actionType == "CLICK" {
 			if err := common.Click(&game, row, col); err != nil {
-				return nil, err
+				return response, err
 			}
 		}
 
 		if actionType == "FLAG" {
 			if err := common.Flag(&game, row, col); err != nil {
-				return nil, err
+				return response, err
 			}
 		}
 		response = &game
