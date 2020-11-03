@@ -15,10 +15,13 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if os.Getenv("ENVIRONMENT") == "dev" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
 	}
+
 	netcommon.LoadConfig()
 	mwRepo := mwrepo.NewMinesWeeperRepo()
 	cacheSvc := cache.NewRedisInstance()
