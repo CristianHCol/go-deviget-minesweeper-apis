@@ -39,7 +39,7 @@ func TestSetMetaAndError(t *testing.T) {
 	rs := &common.BaseHTTPResponse{}
 	SetMetaAndError(rs, errors.New("sample error"), serviceName, serviceVersion)
 	assert.NotNil(t, rs.Meta)
-	assert.Equal(t, rs.Error.ErrorCode, mw.UserInternalError)
+	assert.Equal(t, rs.Error.ErrorCode, mw.ErrInternalError)
 }
 
 func TestSetMeta(t *testing.T) {
@@ -53,16 +53,16 @@ func TestSetError(t *testing.T) {
 	SetError(rs, nil)
 	assert.Nil(t, rs.Error)
 	SetError(rs, errors.New("sample error"))
-	assert.Equal(t, rs.Error.ErrorCode, mw.UserInternalError)
-	SetError(rs, mw.ErrNoUserAffected)
-	assert.Error(t, mw.ErrNoUserAffected, rs.Error.ErrorCode)
+	assert.Equal(t, rs.Error.ErrorCode, mw.ErrInternalError)
+	SetError(rs, mw.ErrInternalError)
+	assert.Error(t, mw.ErrInternalError, rs.Error.ErrorCode)
 }
 
 func TestGetErrorHTTPStatusCode(t *testing.T) {
-	code1 := GetErrorHTTPStatusCode("USR_003")
+	code1 := GetErrorHTTPStatusCode("USR_001")
 	code2 := GetErrorHTTPStatusCode("NON_EXISTING_003")
 
-	assert.Equal(t, http.StatusNotModified, code1)
+	assert.Equal(t, http.StatusBadRequest, code1)
 	assert.Equal(t, http.StatusInternalServerError, code2)
 }
 
