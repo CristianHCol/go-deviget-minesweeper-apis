@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	netcommon "github.com/CristianHCol/go-deviget-minesweeper-apis/internal/network/common"
@@ -17,6 +18,7 @@ func main() {
 	// if err != nil {
 	// 	log.Fatal("Error loading .env file")
 	// }
+	fmt.Println(os.Getenv("CACHE_URI"))
 	netcommon.LoadConfig()
 	mwRepo := mwrepo.NewMinesWeeperRepo()
 	cacheSvc := cache.NewRedisInstance()
