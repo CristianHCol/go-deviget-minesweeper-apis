@@ -17,7 +17,7 @@ var redisIdleConn, _ = strconv.Atoi(os.Getenv("CACHE_IDLE_CONN"))
 // GetRedisConnection returns a redis connection
 func GetRedisConnection(ctx context.Context) *redis.Conn {
 	if redisConnection == nil {
-		var resolvedURL = os.Getenv("REDISCLOUD_URL")
+		var resolvedURL = os.Getenv("CACHE_URI")
 		var password = ""
 
 		parsedURL, _ := url.Parse(resolvedURL)
