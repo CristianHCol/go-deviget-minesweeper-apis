@@ -94,8 +94,10 @@ func (h *MinesweeperHandler) ActionGame(rctx *fasthttp.RequestCtx) {
 
 	request := mw.MapToAction(rq)
 	rs, err := h.svc.ActionGame(ctx, UserName, Name, request.Type, request.Row, request.Column)
+	fmt.Println(err)
+	fmt.Println(rs)
 	if err != nil {
-		fmt.Println("[start game Handler]: error starting game", err)
+		fmt.Println("[action game Handler]: error starting game", err)
 		SetMetaAndError(response, err)
 		statusCode := GetErrorHTTPStatusCode(response.Error.ErrorCode)
 		rctx.SetBody(MarshalResponse(response))
