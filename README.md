@@ -14,8 +14,7 @@ Contains all Apis for the Minesweeper game. Written in Golang and Redis.
 ## How play it?
 - Create an user
 ```shell script
-curl -X POST \
-  http://localhost:8090/api/v1/mw/user \
+curl -X POST http://localhost:8090/api/v1/mw/user 
   -d '{
 	"user_name": "Kriz"
 }'
@@ -28,8 +27,7 @@ curl -X POST \
 - **mines** Number of mines of game
 
 ```shell script
-curl -X POST \
-  http://localhost:8090/api/v1/mw/game \
+curl -X POST http://localhost:8090/api/v1/mw/game 
   -d '{
     "user_name": "Kriz",
     "colums": 10,
@@ -43,8 +41,7 @@ curl -X POST \
 - **user_name** the username above created
 
 ```shell script
-curl -X GET \
-  http://localhost:8090/api/v1/mw/game/{game_name}/{user_name} \
+curl -X GET http://localhost:8090/api/v1/mw/game/{game_name}/{user_name}
 ```
 
 -  Execute an action (If the user is not created system will return an USR_404)
@@ -55,8 +52,7 @@ for action_type you migth use: 'CLICK' or 'FLAG'
 - **column** column to mark or flag
 
 ```shell script
-curl -X POST \
-  http://localhost:8090/api/v1/mw/game/{game_name}/{user_name}/action \
+curl -X POST http://localhost:8090/api/v1/mw/game/{game_name}/{user_name}/action 
   -d '{
     "action_type": "CLICK",
     "row": 4,
