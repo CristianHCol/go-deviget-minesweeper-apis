@@ -98,8 +98,12 @@ func (h *MinesweeperHandler) ActionGame(rctx *fasthttp.RequestCtx) {
 		fmt.Println("[action game Handler]: error doing an action", err)
 		SetMetaAndError(response, err)
 		statusCode := GetErrorHTTPStatusCode(response.Error.ErrorCode)
+		if rs != nil {
+			response.Data = rs
+		}
 		rctx.SetBody(MarshalResponse(response))
 		rctx.SetStatusCode(statusCode)
+
 		return
 	}
 

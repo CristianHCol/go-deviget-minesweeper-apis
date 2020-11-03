@@ -48,12 +48,46 @@ func Click(game *model.Game, i, j int) error {
 	game.Grid[i][j].Clicked = true
 	if game.Grid[i][j].Mine {
 		game.Status = "GAME_OVER"
+		game.TimeSpent = time.Now().Sub(game.StartedAt)
 		return nil
 	}
 	game.Cliks++
 	if checkWon(game) {
 		game.Status = "WON"
 		game.TimeSpent = time.Now().Sub(game.StartedAt)
+		return nil
+	}
+	checkAdjacents(game, i, j)
+	return nil
+}
+
+// TODO checkAdjacents the adjacents click
+func checkAdjacents(game *model.Game, i, j int) error {
+
+	if game.Rows > j+1 && !game.Grid[i][j+1].Mine {
+		game.Grid[i][j+1].Clicked = true
+		game.Cliks++
+	}
+
+	if j-1 >= 0 && !game.Grid[i][j-1].Mine {
+		game.Grid[i][j-1].Clicked = true
+		game.Cliks++
+	}
+
+	if game.Cols > i+1 && !game.Grid[i+1][j].Mine {
+		game.Grid[i+1][j].Clicked = true
+		game.Cliks++
+	}
+
+	if i-1 >= 0 && !game.Grid[i-1][j].Mine {
+		game.Grid[i-1][j].Clicked = true
+		game.Cliks++
+	}
+
+	if checkWon(game) {
+		game.Status = "WON"
+		game.TimeSpent = time.Now().Sub(game.StartedAt)
+		return nil
 	}
 	return nil
 }

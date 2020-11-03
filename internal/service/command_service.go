@@ -116,15 +116,15 @@ func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName 
 		fmt.Println("Invalid username for this game: " + userName)
 		return nil, dmmw.ErrGamePermissionDenied
 	}
-
+	response = &game
 	if game.Status == "GAME_OVER" {
 		fmt.Println("The game is OVER: " + gameName)
-		return nil, dmmw.ErrGameIsOver
+		return response, dmmw.ErrGameIsOver
 	}
 
 	if game.Status == "WON" {
 		fmt.Println("The game is WON: " + gameName)
-		return nil, dmmw.ErrGameIsWon
+		return response, dmmw.ErrGameIsWon
 	}
 
 	if game.Status == "PLAYING" {
@@ -153,16 +153,16 @@ func (s *Minesweeper) ActionGame(ctx context.Context, userName string, gameName 
 
 		if game.Status == "GAME_OVER" {
 			fmt.Println("The game is OVER: " + gameName)
-			return nil, dmmw.ErrGameIsOver
+			return response, dmmw.ErrGameIsOver
 		}
 
 		if game.Status == "WON" {
 			fmt.Println("The game is WON: " + gameName)
-			return nil, dmmw.ErrGameIsWon
+			return response, dmmw.ErrGameIsWon
 		}
 	} else {
 		fmt.Println("Unknown game status: " + game.Status)
-		return nil, dmmw.ErrInternalError
+		return response, dmmw.ErrInternalError
 	}
 
 	return response, nil
