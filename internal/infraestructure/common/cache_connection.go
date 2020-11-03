@@ -24,6 +24,7 @@ func GetRedisConnection(ctx context.Context) *redis.Conn {
 			Addr:         resolvedURL,
 			PoolSize:     redisPoolSize,
 			MinIdleConns: redisIdleConn,
+			Password:     os.Getenv("CACHE_PASSWORD"),
 		})
 	}
 
