@@ -16,8 +16,8 @@ var (
 	ErrGamePermissionDenied = status.New(codes.PermissionDenied, "[game]: the username does not have permissions for this game").Err()
 	ErrGameAlreadyStarted   = status.New(codes.PermissionDenied, "[game]: the game is already started").Err()
 	ErrGameIsNotStarted     = status.New(codes.PermissionDenied, "[game]: the game is not started or is over").Err()
-	ErrGameIsOver           = status.New(codes.Aborted, "[game]: the game is over!!").Err()
-	ErrGameIsWon            = status.New(codes.Aborted, "[game]: You won!!").Err()
+	ErrGameIsOver           = status.New(codes.Aborted, "[game]: the game is over, YOU STEPPED ON A MINE!!").Err()
+	ErrGameIsWon            = status.New(codes.Aborted, "[game]: You won, CONGRATULATIONS!!").Err()
 )
 
 // Error codes the usage of this codes is to reply to to the clients
