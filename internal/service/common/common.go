@@ -67,6 +67,7 @@ func Flag(game *model.Game, i, j int) error {
 	if game.Grid[i][j].Flagged {
 		return errors.New("Already flag this field")
 	}
+	game.Grid[i][j].Flagged = true
 	return nil
 }
 
