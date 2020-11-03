@@ -2,10 +2,12 @@ package common
 
 import (
 	"context"
+	"net/url"
 	"os"
 	"strconv"
 
 	"github.com/go-redis/redis/v8"
+	"gopkg.in/redis.v3"
 )
 
 var redisConnection *redis.Client
@@ -17,7 +19,7 @@ var redisIdleConn, _ = strconv.Atoi(os.Getenv("CACHE_IDLE_CONN"))
 func GetRedisConnection(ctx context.Context) *redis.Conn {
 	if redisConnection == nil {
 		redisConnection = redis.NewClient(&redis.Options{
-			Addr:         os.Getenv("CACHE_URI"),
+			Addr:         url.Parse(os.Getenv("CACHE_URI")),
 			PoolSize:     redisPoolSize,
 			MinIdleConns: redisIdleConn,
 		})
